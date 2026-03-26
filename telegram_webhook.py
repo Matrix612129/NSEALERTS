@@ -82,6 +82,11 @@ def webhook():
     return (jsonify({"status": "ok"}), 200) if ok else (jsonify({"status": "error"}), 500)
 
 
+@app.route("/")
+def index():
+    return jsonify({"status": "running", "service": "NSE Alerts Bot"}), 200
+
+
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({"status": "running"}), 200
