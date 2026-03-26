@@ -62,8 +62,11 @@ threading.Thread(target=keep_alive, daemon=True).start()
 
 
 # ─── ROUTES ───────────────────────────────────────────────────
-@app.route("/webhook", methods=["POST"])
+@app.route("/webhook", methods=["GET", "POST"])
 def webhook():
+    if request.method == "GET":
+        return jsonify({"status": "ready", "detail": "Send a POST request with your alert"}), 200
+
     raw = request.get_data(as_text=True).strip()
 
     if not raw:
